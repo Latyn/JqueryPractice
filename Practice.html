@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="conatiner">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">DataTables Advanced Tables | <span id="addModal" class="glyphicon glyphicon-plus-sign btn" data-toggle="modal" data-target="#myModal" aria-hidden="true"></span></h3>
+  </div>
+  <div class="panel-body">
+<div class="table-responsive">          
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First Input</th>
+        <th>Second Input</th>
+        <th>Third Input</th>
+        <th>Fourth Input</th>
+		<th>Buttons</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+  </table>
+  </div>
+  </div>
+</div>
+<div class="conatiner">
+<button type="button" class="btn btn-primary btn-md">Show my table values</button>
+</div>
+</div>
+
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add new Row to Table</h4>
+        </div>
+        <div class="modal-body">
+					<div class="form-group">
+					<label for="firstI">First Input:</label>
+					<input type="text" class="form-control" id="firstI">
+					</div>
+					<div class="form-group">
+					  <label for="secondI">Second Input:</label>
+					  <input type="text" class="form-control" id="secondI">
+					</div>
+					<div>
+					<label for="thirdI">Third Input:</label>
+					<input type="text" class="form-control" id="thirdI">
+					</div>
+					<div class="form-group">
+					  <label for="fourthI">Fourth Input:</label>
+					  <input type="text" class="form-control" id="fouthI">
+					</div>
+			</div>
+		  <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary">Add Row</button>
+        </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+  <button id="add">Add</button>
+  <script>
+$(document).ready(function(){
+	$("#add").click(function(){
+		alert("Hello! I am an alert box!!");
+		$("#tableBody").append('<tr valign="top"><td>' + 'Line 1' +  i + '</td><td>' + 'Line 2' +  i + '</td><td>' + 'Line 3' +  i + '</td><td>' + 'Line 4' +  i + '</td><a class="remCF">Remove</a></td></tr>');
+		});
+		});
+		
+ </script>
+</body>
+
+</html>
+
