@@ -17,7 +17,7 @@
   </div>
   <div class="panel-body">
 <div class="table-responsive">          
-  <table class="table">
+  <table  id="mainTable" class="table">
     <thead>
       <tr>
         <th>First Input</th>
@@ -78,13 +78,23 @@
   </div>
   <button id="add">Add</button>
   <script>
-$(document).ready(function(){
-	$("#add").click(function(){
-		alert("Hello! I am an alert box!!");
-		$("#tableBody").append('<tr valign="top"><td>' + 'Line 1' +  i + '</td><td>' + 'Line 2' +  i + '</td><td>' + 'Line 3' +  i + '</td><td>' + 'Line 4' +  i + '</td><a class="remCF">Remove</a></td></tr>');
+        var i=0;
+		$(document).ready(function(){
+
+			//Adding Line
+			$("#add").click(function(){
+				$("#tableBody").append('<tr valign="top"><td>' + 'Line 1' +  i + '</td><td>' + 'Line 2' +  i + '</td><td>' + 'Line 3' +  i + '</td><td>' + 'Line 4' +  i + '</td><td><span  class="remove glyphicon glyphicon-minus-sign btn"></span></td></tr>');
+				i++;
+				});
+				
+			//Removing Line
+			$(document).on("click",".remove", function(){
+				//alert("Hello! I am an alert box!!");
+				$(this).parent().parent().remove();
+			});
+			
 		});
-		});
-		
+				
  </script>
 </body>
 
