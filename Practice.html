@@ -34,7 +34,7 @@
   </div>
 </div>
 <div class="conatiner">
-<button type="button" class="btn btn-primary btn-md">Show my table values</button>
+<button id="print" type="button" class="btn btn-primary btn-md">Show my table values</button>
 </div>
 </div>
 
@@ -49,6 +49,10 @@
           <h4 class="modal-title">Add new Row to Table</h4>
         </div>
         <div class="modal-body">
+		
+							<!-- The hidden id -->
+					<input type="hidden" id="elementId" value="" />
+					
 					<div class="form-group">
 					<label for="firstI">First Input:</label>
 					<input type="text" class="form-control" id="firstI">
@@ -63,12 +67,13 @@
 					</div>
 					<div class="form-group">
 					  <label for="fourthI">Fourth Input:</label>
-					  <input type="text" class="form-control" id="fouthI">
+					  <input type="text" class="form-control" id="fourthI">
 					</div>
 			</div>
 		  <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		  <button type="button" class="btn btn-primary">Add Row</button>
+		  <button type="button" id="add" class="btn btn-primary">Add Row</button>
+		  <button type="button" id="edit" class="btn btn-primary">Edit Row</button>
         </div>
         </div>
 
@@ -76,23 +81,95 @@
       
     </div>
   </div>
-  <button id="add">Add</button>
   <script>
         var i=0;
 		$(document).ready(function(){
 
+		    $("#editar").hide();
+			
 			//Adding Line
 			$("#add").click(function(){
-				$("#tableBody").append('<tr valign="top"><td>' + 'Line 1' +  i + '</td><td>' + 'Line 2' +  i + '</td><td>' + 'Line 3' +  i + '</td><td>' + 'Line 4' +  i + '</td><td><span  class="remove glyphicon glyphicon-minus-sign btn"></span></td></tr>');
-				i++;
+			
+			    section1 = $("#firstI").val();
+				section2 = $("#secondI").val();
+				section3 = $("#thirdI").val();
+				section4 = $("#fourthI").val();
+			    
+					if(section1 != "" &&  section2 != "" &&  section3 != "" &&  section4!= ""){
+					$("#tableBody").append('<tr valign="top" id='+i+'><td class="edit">' + section1 + '</td><td class="edit">' + section2 + '</td><td class="edit">' + section3 + '</td><td class="edit">' + section4 + '</td><td><span  class="remove glyphicon glyphicon-minus-sign btn"></span></td></tr>');
+					i++;
+					}
+					else{
+					   alert("Cannot save empty fields");
+					}
+					$("#myModal").modal("hide");
 				});
 				
 			//Removing Line
 			$(document).on("click",".remove", function(){
 				//alert("Hello! I am an alert box!!");
 				$(this).parent().parent().remove();
+				event.stopPropagation();
 			});
 			
+			//Edit Modal
+			$(document).on("click",".edit",function(){;
+			    $("#edit").show();
+				$("#add").hide();
+				$("#myModal").modal("show");
+				$("#elementId").val($(this).closest('tr').attr('id') );
+				$("#firstI").val($(this).closest('tr').children()[0].textContent);
+				$("#secondI").val($(this).closest('tr').children()[1].textContent);
+				$("#thirdI").val($(this).closest('tr').children()[2].textContent);
+				$("#fourthI").val($(this).closest('tr').children()[3].textContent);
+			});			
+			
+			//Button functions
+			$("#addModal").click(function(){
+				ClearModal();
+				$("#add").show();
+				$("#edit").hide();				
+			});
+			
+			//Edit row
+			$("#edit").click(function(){
+			
+			    var id  = $("#elementId").val();
+			    var rowToEdit = $("#" + id );
+				
+				section1 = $("#firstI").val();
+				section2 = $("#secondI").val();
+				section3 = $("#thirdI").val();
+				section4 = $("#fourthI").val();
+				
+				if(section1 != "" &&  section2 != "" &&  section3 != "" &&  section4!= ""){
+					rowToEdit.children()[0].textContent	= section1;	
+					rowToEdit.children()[1].textContent	= section2;
+					rowToEdit.children()[2].textContent	= section3;
+					rowToEdit.children()[3].textContent	= section4;
+				}
+				else{
+					 alert("Cannot edit with empty values");
+				}
+				
+				 $("#myModal").modal("hide");
+			});
+			
+						//Edit row
+			$("#print").click(function(){		
+			  var  rows =  $("#tableBody" ).children();
+				rows.each(function() {
+				  
+				  console.log( "1st" + ": " + $(this).children()[0].textContent  + " 2nd" + ": " + $(this).children()[1].textContent +" 3rd" + ": " + $(this).children()[2].textContent + " 4th" + ": " + $(this).children()[3].textContent );
+				});
+			});
+			
+			function ClearModal(){
+				$("#firstI").val("");
+				$("#secondI").val("");
+				$("#thirdI").val("");
+				$("#fourthI").val("");
+			};
 		});
 				
  </script>
