@@ -10,27 +10,33 @@
 </head>
 
 <body>
-<div class="conatiner">
+<div class="row">
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">DataTables Advanced Tables | <span id="addModal" class="glyphicon glyphicon-plus-sign btn" data-toggle="modal" data-target="#myModal" aria-hidden="true"></span></h3>
   </div>
-  <div class="panel-body">
-<div class="table-responsive">          
-  <table  id="mainTable" class="table">
-    <thead>
-      <tr>
-        <th>First Input</th>
-        <th>Second Input</th>
-        <th>Third Input</th>
-        <th>Fourth Input</th>
-		<th>Buttons</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody">
-    </tbody>
-  </table>
+  <div class="row">
+		  <div class="col-sm-2 pull-right">
+		  			<label for="search">Search:</label>
+					<input type="search" class="form-control" id="search">
+		  </div>
   </div>
+  <div class="panel-body">
+		<div class="table-responsive">          
+		  <table  id="mainTable" class="table">
+			<thead>
+			  <tr>
+				<th>First Input</th>
+				<th>Second Input</th>
+				<th>Third Input</th>
+				<th>Fourth Input</th>
+				<th>Buttons</th>
+			  </tr>
+			</thead>
+			<tbody id="tableBody">
+			</tbody>
+		  </table>
+		  </div>
   </div>
 </div>
 <div class="conatiner">
@@ -50,7 +56,7 @@
         </div>
         <div class="modal-body">
 		
-							<!-- The hidden id -->
+							<!-- The hidden id to identify element when editing -->
 					<input type="hidden" id="elementId" value="" />
 					
 					<div class="form-group">
@@ -173,6 +179,17 @@
 				$("#thirdI").val("");
 				$("#fourthI").val("");
 			};
+			
+			$("#search").keyup(function () {
+				var rows = $("#tableBody").find("tr").hide();
+				if (this.value.length) {
+					var data = this.value.split(" ");
+					$.each(data, function (i, v) {
+						rows.filter(":contains('" + v + "')").show();
+					});
+				} else rows.show();
+			});
+			
 		});
 				
  </script>
