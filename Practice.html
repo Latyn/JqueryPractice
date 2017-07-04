@@ -107,9 +107,11 @@
 				
 			//Removing Line
 			$(document).on("click",".remove", function(){
-				//alert("Hello! I am an alert box!!");
-				$(this).parent().parent().remove();
-				event.stopPropagation();
+			
+				if (confirm("Are you sure you want to delete this row?")) {
+					$(this).parent().parent().remove();
+				} 			
+
 			});
 			
 			//Edit Modal
@@ -155,7 +157,7 @@
 				 $("#myModal").modal("hide");
 			});
 			
-						//Edit row
+			//Edit row
 			$("#print").click(function(){		
 			  var  rows =  $("#tableBody" ).children();
 				rows.each(function() {
@@ -164,6 +166,7 @@
 				});
 			});
 			
+			//Clear modal inputs
 			function ClearModal(){
 				$("#firstI").val("");
 				$("#secondI").val("");
